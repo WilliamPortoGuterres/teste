@@ -22,7 +22,7 @@
                     <input type="text" name="cepInicial" id="cepInicial" class="cep form-control">
 
                     <label for="primeiraCoordenada">Primeira coordenada</label>
-                    <input type="text" name="primeiraCoordenada" id="primeiraCoordenada" class=" form-control">
+                    <input type="text" name="primeiraCoordenada" id="primeiraCoordenada" class="form-control">
 
                     <br>
 
@@ -30,12 +30,12 @@
                     <input type="text" name="cepFinal" id="cepFinal" class="cep form-control">
 
                     <label for="segundaCoordenada">Segunda coordenada</label>
-                    <input type="text" name="segundaCoordenada" id="segundaCoordenada" class="cep form-control">
+                    <input type="text" name="segundaCoordenada" id="segundaCoordenada" class="form-control">
 
                     <br>
 
                     <label for="distanciaCep">Distancia entre os endereços </label>
-                    <input type="text" name="distanciaCep" id="distanciaCep" class=" form-control">
+                    <input type="text" name="distanciaCep" id="distanciaCep" class="form-control">
 
                     <br>
 
@@ -47,7 +47,7 @@
 
             </div>
         </div>
-        <?php include("../telas/footer.php");  ?>
+        <?php include((dirname(__DIR__) ."/telas/footer.php"));  ?>
     </div>
     <script src="../scripts/jquery-3.6.0.js"></script>
     <script src="../scripts/bootstrap.js"></script>
