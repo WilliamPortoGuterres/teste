@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
  class localiza{
 
@@ -21,7 +21,7 @@
          $i= (json_decode($file_contents,true));
          
          $resposta=$i['results'][0]['position']['lat'];
-         $resposta.='   ';
+         $resposta.=' ';
          $resposta.=$i['results'][0]['position']['lon'];
          return  $resposta;
          
@@ -33,5 +33,8 @@ $resposta[1]=  $executa->localizaCep($_POST['cep1']);
 $resposta[2]=  $executa->localizaCep($_POST['cep2']);
 
 echo json_encode($resposta);
+$_SESSION['coordenada1']=$resposta[1];
+$_SESSION['coordenada2']=$resposta[2];
 
+include_once('calculaDistancia.php');
 ?>
