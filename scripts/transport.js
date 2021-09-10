@@ -33,7 +33,6 @@ $('#cepInicial').keyup(function () {
             success: function (response) {
                 if (response == 'existe') {
                     $('#cepInicial').css('background-color', 'green');
-                    console.log(response);
                 } if(response=='naoexiste'){
                     $('#cepInicial').css('background-color', 'red');
 
@@ -62,7 +61,6 @@ $('#cepFinal').keyup(function () {
             success: function (response) {
                 if (response == 'existe') {
                     $('#cepFinal').css('background-color', 'green');
-                    console.log(response);
                 } if(response=='naoexiste'){
                     $('#cepFinal').css('background-color', 'red');
 
@@ -73,4 +71,31 @@ $('#cepFinal').keyup(function () {
             }
         });
     }
+});
+
+
+$('#cepFinal').keyup(function () {
+    var cep1 = $('input[name="cepInicial"]').val()
+    var cep2 = $('input[name="cepFinal"]').val()
+
+    if (cep2.length == 8 && cep1.length == 8)
+    {
+    }
+   
+
+    
+    $.ajax({
+        url: '../controles/localiza.php',
+        type: 'POST',
+        data: ({ cep1: cep1 ,cep2: cep2 }),
+        success: function (response) {   
+         var response2= "terra"
+            $('#primeiraCoordenada').text(response2);     
+            
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+    });
+
 });

@@ -4,8 +4,11 @@
  if(isset($_POST['cep1'])){$cep1=$_POST['cep1'];}
  if(isset($_POST['cep2'])){$cep2=$_POST['cep2'];}
  
- function testaCep($params){ 
- 
+class testaExistencia{
+
+    
+  public static function testaCep($params){ 
+        
         $key = 'cafd025c295ee1228840cc45c58b954c';
         $uri="https://www.cepaberto.com/api/v3/cep?cep=".$params;
         $type_request='GET';
@@ -21,16 +24,18 @@
             
             return "existe";
         }else{
-
+            
             return"naoexiste";
         }
+    }
 }
- if(isset($cep1)){
+$executa= new testaExistencia;
+    if(isset($cep1)){
 
-    echo testaCep($cep1);
+    echo $executa->testaCep($cep1);
 }
 if(isset($cep2)){
 
-    echo testaCep($cep2);
+    echo $executa->testaCep($cep2);
 }
 ?>
