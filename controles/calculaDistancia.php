@@ -4,8 +4,6 @@
 $coordenada1= json_decode( $resposta[1]);
 $coordenada2= json_decode( $resposta[2]);
 
-//$coordenada1= explode(" ",$coordenada1);
-//$coordenada2= explode(" ",$coordenada2);
 
 class calculaDistancia {
     
@@ -26,7 +24,12 @@ class calculaDistancia {
     }
 };
 $calculaDistancia=new calculaDistancia;
-$resposta[2]=  $calculaDistancia-> distancia($coordenada1->lat,$coordenada1->lon, $coordenada2->lat,$coordenada2->lon) ;
+          $tempResposta=       $calculaDistancia-> distancia($coordenada1->lat,$coordenada1->lon, $coordenada2->lat,$coordenada2->lon) ;
+ $resposta= explode(".",$tempResposta);
+
+
+$resposta[2]['km']=$tempResposta[0];
+$resposta[2]['metros']=(float)$tempResposta[2]*100;
 
 $resposta[0]=$coordenada1;
 $resposta[1]=$coordenada2;
