@@ -18,14 +18,17 @@
          curl_close($request);
          
          
-         $i= (json_decode($file_contents,true));
+         $informacao= (json_decode($file_contents,true));//transforma em arrey
          
-         $resposta=$i['results'][0]['position']['lat'];
-         $resposta.=' ';
-         $resposta.=$i['results'][0]['position']['lon'];
-         return  $resposta;
+
+
+         $resposta['lat']=$informacao['results'][0]['position']['lat'];
          
+         $resposta['lon']=$informacao['results'][0]['position']['lon'];
+
+         $resposta['postalCode']= $informacao['results'][0]['address']['postalCode'] ;
          
+         return  json_encode($resposta);
         }
     }
 $executa =new localiza;
@@ -34,11 +37,11 @@ if(isset($_POST['cep1']) && isset($_POST['cep2'])){
 $resposta[1]=  $executa->localizaCep($_POST['cep1']);
 $resposta[2]=  $executa->localizaCep($_POST['cep2']);
 
-echo json_encode($resposta);
+/*echo json_encode($resposta);
 $coordenada1=$resposta[1];
 $coordenada2=$resposta[2];
-
-include_once('calculaDistancia.php');
+*/
+include('calculaDistancia.php');
 
 }
 ?>
