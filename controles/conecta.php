@@ -1,8 +1,8 @@
 <?php
 $servidor="localhost";
-$usuario="usuario";
-$senha ="astoria13";
-$banco="capsrestinga1";
+$usuario="root";
+$senha ="";
+$banco="teste_giovan";
 
 $conn = mysqli_connect($servidor,$usuario,$senha,$banco);
 ?>

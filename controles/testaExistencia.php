@@ -1,8 +1,7 @@
 <?php
   
   
- if(isset($_POST['cep1'])){$cep1=$_POST['cep1'];}
- if(isset($_POST['cep2'])){$cep2=$_POST['cep2'];}
+ 
  
 class testaExistencia{
 
@@ -20,22 +19,23 @@ class testaExistencia{
         curl_setopt ($request, CURLOPT_CUSTOMREQUEST, $type_request); 
         $file_contents = curl_exec($request);
         curl_close($request);
-        if($file_contents!='{}'){
+       // echo json_encode( $file_contents); // verificaca json
+        if($file_contents=='{}'){
             
-            return "existe";
+            return "naoexiste";
         }else{
             
-            return"naoexiste";
+            return"existe";
         }
     }
 }
 $executa= new testaExistencia;
-    if(isset($cep1)){
+    if(isset($_POST['cep1'])){
 
-    echo $executa->testaCep($cep1);
+    echo $executa->testaCep($_POST['cep1']);
 }
-if(isset($cep2)){
+if(isset($_POST['cep2'])){
 
-    echo $executa->testaCep($cep2);
+    echo $executa->testaCep($_POST['cep2']);
 }
 ?>

@@ -1,13 +1,12 @@
 <?php
 
-//$coordenada1='-30.03417  -51.18121';
-//$coordenada2='-29.92453  -51.13568';
 
 
-$coordenada1= explode(" ",$_SESSION['coordenada1']);
-$coordenada2= explode(" ",$_SESSION['coordenada2']);
 
-class calculaDistancia{
+$coordenada1= explode(" ",$coordenada1);
+$coordenada2= explode(" ",$coordenada2);
+
+class calculaDistancia {
     
  public static function distancia($lat1, $lon1, $lat2, $lon2){
         
@@ -26,10 +25,10 @@ class calculaDistancia{
     }
 };
 $calculaDistancia=new calculaDistancia;
-echo $calculaDistancia-> distancia($coordenada1[0],$coordenada1[1], $coordenada2[0],$coordenada2[1]) ;
+echo json_encode( $calculaDistancia-> distancia($coordenada1[0],$coordenada1[1], $coordenada2[0],$coordenada2[1])) ;
 
 
-session_destroy();
+
 
 
 ?>

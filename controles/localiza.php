@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
  class localiza{
 
@@ -29,12 +29,16 @@ session_start();
         }
     }
 $executa =new localiza;
+if(isset($_POST['cep1']) && isset($_POST['cep2'])){
+
 $resposta[1]=  $executa->localizaCep($_POST['cep1']);
 $resposta[2]=  $executa->localizaCep($_POST['cep2']);
 
 echo json_encode($resposta);
-$_SESSION['coordenada1']=$resposta[1];
-$_SESSION['coordenada2']=$resposta[2];
+$coordenada1=$resposta[1];
+$coordenada2=$resposta[2];
 
 include_once('calculaDistancia.php');
+
+}
 ?>
