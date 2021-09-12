@@ -12,3 +12,4 @@ if(mysqli_affected_rows($conn)>0){
 	//resposta negativa
 };
 
+mysqli_close($conn);

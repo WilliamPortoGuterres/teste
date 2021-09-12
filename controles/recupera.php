@@ -2,11 +2,17 @@
 
 include("./conecta.php");
 
-
+if (mysqli_connect_errno()) {
+    printf("falha na conexão: %s\n", mysqli_connect_error());
+    exit();
+}
 
 $query = "SELECT * FROM `dados`" ;
 
 $resultado = mysqli_query($conn, $query);
+
+
+
 
 echo '  <thead>
 <tr>
@@ -24,18 +30,27 @@ echo '  <thead>
 while($row = mysqli_fetch_assoc($resultado)){
    echo' 
 <tr >
-      <td id="util '. $row["id_dados"] .'" ><button id="atualizar" class="btn btn-primary" >Atualizar</button></td>
+      <td><button id="atualizar" class="btn btn-primary" >Atualizar</button></td>
       <td>'. $row["id_dados"] .'</td>
       <td>'. $row["cepOrigem"] .'</td>
       <td>'. $row["cepDestino"] .'</td>
       <td>'. $row["distanciaCalculada"] .'</td>
-      <td>'. $row["horaCadastro"] .'</td>
-      <td>'. $row["horaAlteracao"] .'</td>
+      <td>'. organiza($row["horaCadastro"]) .'</td>
+      <td>'. organiza($row["horaAlteracao"]) .'</td>
       
 </tr>'
 
 			
 ;}
+function organiza($data){
 
+$temp=explode(' ',$data);
+$temp[0]= implode("/",array_reverse(explode("-",$temp[0])));
 
+$data=$temp[1];
+$data.=' ';
+$data.=$temp[0];
+return $data;
+}
+mysqli_close($conn);
 ?>

@@ -121,13 +121,33 @@ $( document ).ready(function() {
     });
 });
 
+
+$('#btn2').click(function () {
+
+    $.ajax({
+        url: '../controles/recupera.php',
+        type: 'POST',
+        success: function (response) {   
+           //var obj = JSON.parse(response);
+           
+            $('#distanciasCalculadas').html(response);     
+           
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+    });
+});
+
+
 $('#atualizar').click(function () {
-    var id=$('input[name="cepInicial"]').val()
+    alert('funciona')
+  /*  var id = $(item).closest('#id');
+   var id=$("#atualizar").val()
     var cep1 = $('input[name="cepInicial"]').val()
     var cep2 = $('input[name="cepFinal"]').val()
     var distanciaCep = $('input[name="distanciaCep"]').val()
-   
-    
+   console.log(id);
     $.ajax({
         url: '../controles/atualiza.php',
         type: 'POST',
@@ -138,5 +158,5 @@ $('#atualizar').click(function () {
         error: function (xhr, status, error) {
             alert(xhr.responseText);
         }
-    });
+    });*/
 });
