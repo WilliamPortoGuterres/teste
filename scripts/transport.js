@@ -2,13 +2,15 @@ $('#btn1').click(function () {
 
     var cep1 = $('input[name="cepInicial"]').val()
     var cep2 = $('input[name="cepFinal"]').val()
+    var distanciaCep = $('input[name="distanciaCep"]').val()
+   
     
     $.ajax({
-        url: '../controles/localiza.php',
+        url: '../controles/insere.php',
         type: 'POST',
-        data: ({ cep1: cep1, cep2: cep2 }),
+        data: ({ cep1: cep1, cep2: cep2 ,distanciaCep:distanciaCep}),
         success: function (response) {
-            $('#distanciaCep').html(response);
+            alert(response);
         },
         error: function (xhr, status, error) {
             alert(xhr.responseText);
@@ -88,9 +90,11 @@ $('#cepFinal').keyup(function () {
             type: 'POST',
             data: ({ cep1: cep1 ,cep2: cep2 }),
             success: function (response) {   
-                var response2= "terra"
-                $('#primeiraCoordenada').html(response2);     
-                
+               var obj = JSON.parse(response);
+               
+                $('#primeiraCoordenada').val("Lat "+obj[0].lat+" Lon "+obj[0].lon );     
+                $('#segundaCoordenada').val("Lat "+obj[1].lat+" Lon "+obj[1].lon );  
+                $('#distanciaCep').val(obj[2].km+" Km "+obj[2].metros+" metros" );  
             },
             error: function (xhr, status, error) {
                 alert(xhr.responseText);
@@ -98,4 +102,21 @@ $('#cepFinal').keyup(function () {
         });
     }
 
+});
+
+$( document ).ready(function() {
+      
+    $.ajax({
+        url: '../controles/recupera.php',
+        type: 'POST',
+        success: function (response) {   
+           //var obj = JSON.parse(response);
+           
+            $('#distanciasCalculadas').html(response);     
+           
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+    });
 });

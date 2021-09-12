@@ -13,9 +13,7 @@
     <div class="container">
         <?php include(dirname(__DIR__) . "/telas/navbar.php") ?>
         <div class="row">
-            <div class="col-sm-3">
-
-            </div>
+           
             <div class="col-sm">
                 <form action="#" id="form" method="post">
                     <label for="cepInicial">Cep inicial</label>
@@ -39,12 +37,20 @@
 
                     <br>
 
-                    <input type="button" value="enviar" id="btn1" class="btn btn-primary">
+                    <input type="button" value="resgistrar" id="btn1" class="btn btn-primary">
 
                 </form>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-6">
+                <label for="">Distancias já calculadas</label>
+<div >
+<table  class="table table-responsive table-hover" id="distanciasCalculadas">
 
+
+</table>
+
+
+</div>
             </div>
         </div>
         <?php include((dirname(__DIR__) ."/telas/footer.php"));  ?>
