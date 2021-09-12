@@ -24,7 +24,7 @@ echo '  <thead>
 while($row = mysqli_fetch_assoc($resultado)){
    echo' 
 <tr >
-      <td ><button id="atualizar" class="btn btn-primary" >Atualizar</button></td>
+      <td id="util '. $row["id_dados"] .'" ><button id="atualizar" class="btn btn-primary" >Atualizar</button></td>
       <td>'. $row["id_dados"] .'</td>
       <td>'. $row["cepOrigem"] .'</td>
       <td>'. $row["cepDestino"] .'</td>

@@ -38,6 +38,7 @@
                     <br>
 
                     <input type="button" value="resgistrar" id="btn1" class="btn btn-primary">
+                    <input type="button" value="atualiza tabela" id="btn2" class="btn btn-primary">
 
                 </form>
             </div>

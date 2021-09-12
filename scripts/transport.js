@@ -120,3 +120,23 @@ $( document ).ready(function() {
         }
     });
 });
+
+$('#atualizar').click(function () {
+    var id=$('input[name="cepInicial"]').val()
+    var cep1 = $('input[name="cepInicial"]').val()
+    var cep2 = $('input[name="cepFinal"]').val()
+    var distanciaCep = $('input[name="distanciaCep"]').val()
+   
+    
+    $.ajax({
+        url: '../controles/atualiza.php',
+        type: 'POST',
+        data: ({ cep1: cep1, cep2: cep2 ,distanciaCep:distanciaCep}),
+        success: function (response) {
+            alert(response);
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+    });
+});
