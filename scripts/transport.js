@@ -40,7 +40,7 @@ function buscaId(id) {
 
             console.log(response)
             if (!response) {
-                alert('não deu');
+                alert('nÃƒÂ£o deu');
             } else {
 
                 $('#cepInicial').val(response.cepO)
@@ -59,99 +59,128 @@ function buscaId(id) {
 }
 
 function salvar() {
-    var cep1 = $('input[name="cepInicial"]').val()
-    var cep2 = $('input[name="cepFinal"]').val()
-    var distanciaCep = $('input[name="distanciaCep"]').val()
-    var requisicao = { cep1, cep2, distanciaCep };
-    if (id != null) {
-        requisicao.id = id;
+    var fieldCep1 = '#cepInicial';
+    var fieldCep2 = '#cepFinal';
+    var fieldDistanciaCep = '#distanciaCep';
+    var cep1 = $(fieldCep1).val()
+    var cep2 = $(fieldCep2).val()
+    var distanciaCep = $(fieldDistanciaCep).val();
+    var cep1Valido = testaCep(fieldCep1);
+    var cep2Valido = testaCep(fieldCep2);
+    if (cep1Valido && cep2Valido) {
+        var requisicao = { cep1, cep2, distanciaCep };
+        if (id != null) {
+            requisicao.id = id;
+        }
 
+        $.ajax({
+            url: '../controles/insere.php',
+            type: 'POST',
+            data: requisicao,
+            success: function (response) {
+                alert(response);
+                window.location.href = '../telas/home.php';
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    }else{
+        alert("Verifique os CEPs digitados!");
     }
 
-    $.ajax({
-        url: '../controles/insere.php',
-        type: 'POST',
-        data: requisicao,
-        success: function (response) {
-            alert(response);
-            window.location.href = '../telas/home.php';
-        },
-        error: function (xhr, status, error) {
-            alert(xhr.responseText);
-        }
-    });
+
 
 
 }
 
 $('#btnRegistra').click(function () {
-
+    salvar();
 
 });
 
-function validaForm() {
 
-    var cep1 = $('input[name="cepInicial"]').val()
-    var cep2 = $('input[name="cepFinal"]').val()
-    if (cep1.length == 8 && cep2.length == 8) {
+function modificaControles(cep, respostaCoordenada, valido) {
+    if (valido) {
 
-        return true;
+        $(cep).css('border-color', '#00a000');
+        $(respostaCoordenada).html('Cep valido');
+        $(respostaCoordenada).css('color', '#00a000');
+    } else {
+        $(cep).css('border-color', '#FF0000');
+        $(respostaCoordenada).html('Cep invalido');
+        $(respostaCoordenada).css('color', '#FF0000');
+    }
+
+
+}
+
+function testaCep(cep) {
+    var localCep = $(cep).val();
+    if (localCep.length == 8) {
+        return $.ajax({
+            url: '../controles/testaExistencia.php',
+            type: 'POST',
+            async: false,
+            data: ({ cep: $(cep).val() }),
+            success: function (response) {
+                return response;
+
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                return false;
+            }
+        });
     }
     return false;
-}
-function valida(cep, respostaCoordenada) {
-    $.ajax({
-        url: '../controles/testaExistencia.php',
-        type: 'POST',
-        data: ({ cep: $(cep).val() }),
-        success: function (response) {
-            if (response == 'existe') {
+    
 
-                $(cep).css('border-color', '#32CD32');
-                $(respostaCoordenada).html('Cep confirmado');
-                $(respostaCoordenada).css('color', ' #32CD32');
-
-            } else {
-                $(cep).css('border-color', '#FF0000');
-                $(respostaCoordenada).html('Cep invalido');
-                $(respostaCoordenada).css('color', '#FF0000');
-
-            }
-        },
-        error: function (xhr, status, error) {
-            alert(xhr.responseText);
-        }
-    });
 
 }
+
 
 
 
 $('#cepInicial').keyup(function () {
+    var field = "#cepInicial";
+    var retorno = '#respostaPrimeiraCoordenada'
     var cep1 = $('input[name="cepInicial"]').val()
     if (cep1.length != 8) {
-        $('#cepInicial').css('background-color', '#fff');
-        $('#cepInicial').css('border-color', '#ced4da');
-        $('#respostaPrimeiraCoordenada').html('');
+        $(field).css('background-color', '#fff');
+        $(field).css('border-color', '#ced4da');
+        $(retorno).html('');
 
     }
 
-    if (cep1.length == 8) {
+    else {
+        testaCep(field).done(function(result){
+            debugger;
+            let valido = JSON.parse(result);
+            modificaControles(field, retorno, valido);
+        });
 
+        
 
-        valida('#cepInicial', '#respostaPrimeiraCoordenada')
     }
+
+
 });
 
 $('#cepFinal').keyup(function () {
+    var field = '#cepFinal';
+    var retorno = '#respostaSegundaCoordenada';
     var cep2 = $('input[name="cepFinal"]').val()
     if (cep2.length != 8) {
         $('#cepFinal').css('background-color', '#fff');
     }
 
-    if (cep2.length == 8) {
-
-        valida('#cepFinal', '#respostaSegundaCoordenada')
+    else {
+        testaCep(field).done(function(result){
+            debugger;
+            let valido = JSON.parse(result);
+            modificaControles(field, retorno, valido);
+        });
 
     }
 });
@@ -168,7 +197,6 @@ $(document).ready(function () {
         buscaId(id)
     }
 });
-
 
 
 

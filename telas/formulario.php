@@ -34,10 +34,10 @@
 
                     <label for="cepFinal">Cep final</label>
                     <input type="text" name="cepFinal" id="cepFinal" class="cep form-control">
+                    <div id="respostaSegundaCoordenada"></div>
 
                     <label for="segundaCoordenada">Segunda coordenada</label>
                     <input type="text" name="segundaCoordenada" id="segundaCoordenada" class="form-control" readonly>
-                    <div id="respostaSegundaCoordenada"></div>
                     <br>
 
                     <label for="distanciaCep">Distancia entre os endereços </label>

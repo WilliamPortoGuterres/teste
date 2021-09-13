@@ -22,10 +22,10 @@ class testaExistencia{
        // echo json_encode( $file_contents); // verificaca json
         if($file_contents=='{}'){
             
-            return "naoexiste";
+            return 'false';
         }else{
             
-            return "existe";
+            return 'true';
         }
     }
 }
