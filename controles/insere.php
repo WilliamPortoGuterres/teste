@@ -1,9 +1,26 @@
 <?php
 include("conecta.php");
-
 $cepOrigem= $_POST['cep1'];
 $cepDestino= $_POST['cep2'];
 $distanciaCalculada= $_POST['distanciaCep'];
+$dados='';
+$id=0;
+
+if(isset($_POST['id'])){
+    
+    $id=$_POST['id'];
+    $dados= "UPDATE `dados` SET `cepOrigem`='$cepOrigem',`cepDestino`='$cepDestino',
+    `distanciaCalculada`='$distanciaCalculada',`horaAlteracao`=NOW() where`id_dados`='$id' ";
+
+
+}else{
+
+$dados= "INSERT INTO dados (`cepOrigem`,`cepDestino`,`distanciaCalculada`) 
+VALUES ('$cepOrigem','$cepDestino','$distanciaCalculada')";
+
+
+
+}
 
 
 if (mysqli_connect_errno()) {
@@ -11,15 +28,14 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$dados= "INSERT INTO dados (`cepOrigem`,`cepDestino`,`distanciaCalculada`,`horaAlteracao`) 
-VALUES ('$cepOrigem','$cepDestino','$distanciaCalculada',NOW())";
 $resultado_usuario= mysqli_query($conn,$dados);
-if(mysqli_insert_id($conn)){
-	echo 'cadastrado';
+
+if($resultado_usuario){
+	echo $id==0?'cadastrado':'atualizado';
+    
 }else{
 	
-    echo 'não cadastrado';
+    echo $id==0?'não cadastrado':'não atualizado';
 };
 
 mysqli_close($conn);
-?>

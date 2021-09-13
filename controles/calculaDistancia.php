@@ -35,6 +35,3 @@ $resposta[0]=$coordenada1;
 $resposta[1]=$coordenada2;
 
 echo  json_encode($resposta)  ;
-
-
-?>

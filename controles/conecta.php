@@ -2,7 +2,7 @@
 $servidor="localhost";
 $usuario="root";
 $senha ="";
-$banco="teste_giovan";
+$banco="app_recursos";
 
 $conn = mysqli_connect($servidor,$usuario,$senha,$banco);
 ?>

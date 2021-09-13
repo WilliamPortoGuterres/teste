@@ -25,17 +25,14 @@ class testaExistencia{
             return "naoexiste";
         }else{
             
-            return"existe";
+            return "existe";
         }
     }
 }
 $executa= new testaExistencia;
-    if(isset($_POST['cep1'])){
+    if(isset($_POST['cep'])){
 
-    echo $executa->testaCep($_POST['cep1']);
+    echo $executa->testaCep($_POST['cep']);
 }
-if(isset($_POST['cep2'])){
 
-    echo $executa->testaCep($_POST['cep2']);
-}
 ?>

@@ -27,7 +27,7 @@
          
          $resposta['lon']=$informacao['results'][0]['position']['lon'];
 
-         $resposta['postalCode']= $informacao['results'][0]['address']['extendedPostalCode'] ;
+         //$resposta['postalCode']= $informacao['results'][0]['address']['extendedPostalCode'] ;
          
          return  json_encode($resposta);
         }
